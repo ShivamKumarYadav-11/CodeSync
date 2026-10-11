@@ -1,0 +1,560 @@
+/* ============================================================
+   Memory Visualizer — animated STACK | HEAP teaching panel
+============================================================ */
+.viz-panel {
+    width: 540px;
+    flex-shrink: 0;
+    background: #181825;
+    border-left: 1px solid #313244;
+    display: flex;
+    flex-direction: column;
+    font-size: 0.8rem;
+    min-height: 0;
+}
+
+@media (max-width: 1280px) {
+    .viz-panel {
+        width: 430px;
+    }
+}
+
+.viz-header {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    padding: 0.55rem 0.8rem;
+    border-bottom: 1px solid #313244;
+    flex-shrink: 0;
+}
+
+.viz-title {
+    font-weight: 800;
+    color: #cdd6f4;
+}
+
+.viz-loading {
+    color: #f9e2af;
+    font-size: 0.7rem;
+    animation: viz-pulse 1s infinite;
+}
+
+.viz-close {
+    margin-left: auto;
+    background: none;
+    border: none;
+    color: #a6adc8;
+    cursor: pointer;
+    font-size: 0.9rem;
+}
+
+.viz-placeholder {
+    padding: 2rem 1.4rem;
+    text-align: center;
+    color: #585b70;
+    line-height: 1.7;
+}
+
+.viz-error {
+    color: #f38ba8;
+}
+
+/* ---------- controls ---------- */
+.viz-controls {
+    display: flex;
+    align-items: center;
+    gap: 0.35rem;
+    padding: 0.5rem 0.8rem 0.15rem;
+    flex-shrink: 0;
+}
+
+.viz-controls button {
+    background: #11111b;
+    border: 1px solid #45475a;
+    color: #cdd6f4;
+    min-width: 30px;
+    height: 26px;
+    border-radius: 6px;
+    cursor: pointer;
+    font-size: 0.72rem;
+}
+
+.viz-controls button:hover:not(:disabled) {
+    border-color: #89b4fa;
+}
+
+.viz-controls button:disabled {
+    opacity: 0.35;
+    cursor: default;
+}
+
+.viz-controls select {
+    background: #11111b;
+    color: #cdd6f4;
+    border: 1px solid #45475a;
+    border-radius: 6px;
+    font-size: 0.7rem;
+    padding: 0.15rem 0.25rem;
+    outline: none;
+}
+
+.viz-step {
+    margin-left: auto;
+    color: #585b70;
+    font-size: 0.72rem;
+}
+
+.viz-range {
+    width: calc(100% - 1.6rem);
+    margin: 0.3rem 0.8rem 0.4rem;
+    accent-color: #89b4fa;
+    flex-shrink: 0;
+}
+
+/* ---------- narration ---------- */
+.viz-action {
+    margin: 0 0.8rem 0.45rem;
+    padding: 0.5rem 0.65rem;
+    background: #11111b;
+    border: 1px solid #45475a;
+    border-left: 3px solid #89b4fa;
+    border-radius: 8px;
+    display: flex;
+    gap: 0.5rem;
+    align-items: flex-start;
+    font-size: 0.76rem;
+    line-height: 1.45;
+    color: #cdd6f4;
+    min-height: 46px;
+    flex-shrink: 0;
+}
+
+.viz-action-icon {
+    font-size: 1rem;
+}
+
+.viz-legend {
+    padding: 0 0.8rem 0.5rem;
+    font-size: 0.66rem;
+    color: #585b70;
+    flex-shrink: 0;
+}
+
+/* ---------- scroll area with the two columns ---------- */
+.viz-scroll {
+    flex: 1;
+    overflow-y: auto;
+    position: relative;
+    padding: 0.2rem 0.8rem 0.8rem;
+    min-height: 0;
+}
+
+.viz-columns {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 1rem;
+    position: relative;
+}
+
+.col-title {
+    font-size: 0.68rem;
+    font-weight: 800;
+    letter-spacing: 0.1em;
+    color: #89b4fa;
+    margin: 0.2rem 0 0.5rem;
+    display: flex;
+    justify-content: space-between;
+    align-items: baseline;
+}
+
+.col-sub {
+    color: #585b70;
+    font-weight: 400;
+    letter-spacing: 0;
+    font-size: 0.58rem;
+}
+
+/* ---------- reference arrows (SVG overlay) ---------- */
+.viz-arrows {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    pointer-events: none;
+    z-index: 2;
+    overflow: visible;
+}
+
+.flow-arrow {
+    fill: none;
+    stroke: #89b4fa;
+    stroke-width: 2;
+    stroke-dasharray: 7 5;
+    animation: dash-flow 0.7s linear infinite, arrow-in 0.35s ease;
+}
+
+@keyframes dash-flow {
+    to {
+        stroke-dashoffset: -12;
+    }
+}
+
+@keyframes arrow-in {
+    from {
+        opacity: 0;
+    }
+}
+
+/* ---------- STACK frames ---------- */
+.stack-frames {
+    display: flex;
+    flex-direction: column;
+    gap: 0.45rem;
+}
+
+.frame {
+    background: #11111b;
+    border: 1px solid #313244;
+    border-radius: 10px;
+    padding: 0.5rem 0.6rem;
+}
+
+.frame-top {
+    border-color: #89b4fa;
+    box-shadow: 0 0 0 1px #89b4fa33;
+}
+
+/* new frame slides in from above */
+.frame-enter {
+    animation: frame-in 0.45s cubic-bezier(0.2, 0.9, 0.3, 1.25);
+}
+
+@keyframes frame-in {
+    from {
+        transform: translateY(-18px);
+        opacity: 0;
+    }
+
+    to {
+        transform: none;
+        opacity: 1;
+    }
+}
+
+.frame-head {
+    display: flex;
+    align-items: center;
+    gap: 0.4rem;
+    margin-bottom: 0.35rem;
+    min-width: 0;
+}
+
+.frame-name {
+    color: #f9e2af;
+    font-weight: 800;
+    font-size: 0.78rem;
+}
+
+.frame-args {
+    color: #585b70;
+    font-size: 0.66rem;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+}
+
+.sp-badge {
+    margin-left: auto;
+    font-size: 0.56rem;
+    font-weight: 700;
+    background: #89b4fa22;
+    color: #89b4fa;
+    border: 1px solid #89b4fa55;
+    padding: 0.02rem 0.3rem;
+    border-radius: 4px;
+    flex-shrink: 0;
+}
+
+.ret-badge {
+    margin-left: auto;
+    font-size: 0.6rem;
+    font-weight: 700;
+    background: #a6e3a122;
+    color: #a6e3a1;
+    border: 1px solid #a6e3a155;
+    padding: 0.02rem 0.3rem;
+    border-radius: 4px;
+    flex-shrink: 0;
+}
+
+.frame-empty {
+    color: #45475a;
+    font-style: italic;
+    padding: 0.15rem 0;
+    font-size: 0.7rem;
+}
+
+/* variable rows */
+.var-row {
+    display: flex;
+    align-items: center;
+    gap: 0.4rem;
+    padding: 0.2rem 0.32rem;
+    border-radius: 6px;
+    background: #181825;
+    border: 1px solid transparent;
+    margin-bottom: 0.18rem;
+}
+
+.var-name {
+    font-weight: 700;
+    color: #cdd6f4;
+    min-width: 36px;
+    font-size: 0.74rem;
+}
+
+.var-kind {
+    font-size: 0.62rem;
+}
+
+.var-value {
+    color: #a6adc8;
+    font-size: 0.7rem;
+    flex: 1;
+    text-align: right;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+}
+
+.var-ref {
+    font-size: 0.7rem;
+    font-weight: 800;
+    margin-left: auto;
+    flex-shrink: 0;
+}
+
+/* the variable that just changed glows */
+.var-flash {
+    animation: var-flash 1s ease;
+    border-color: #f9e2af;
+}
+
+@keyframes var-flash {
+    0% {
+        background: #f9e2af44;
+        box-shadow: 0 0 0 2px #f9e2af44;
+    }
+
+    100% {
+        background: #181825;
+    }
+}
+
+/* ghost frame — just returned, fading out */
+.frame.ghost {
+    border-style: dashed;
+    border-color: #585b70;
+    animation: ghost-out 0.75s ease forwards;
+}
+
+@keyframes ghost-out {
+    0% {
+        opacity: 0.95;
+        transform: none;
+    }
+
+    100% {
+        opacity: 0;
+        transform: translateY(10px) scale(0.97);
+    }
+}
+
+/* hatched ground = bottom of the stack */
+.stack-base {
+    height: 12px;
+    border-radius: 4px;
+    margin-top: 0.3rem;
+    background: repeating-linear-gradient(45deg, #313244 0 5px, #181825 5px 10px);
+}
+
+/* ---------- HEAP blocks ---------- */
+.heap-blocks {
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+}
+
+.heap-block {
+    background: #11111b;
+    border: 1.5px solid var(--hc, #fab387);
+    border-radius: 10px;
+    padding: 0.45rem 0.6rem;
+    transition: opacity 0.5s, filter 0.5s;
+}
+
+.heap-head {
+    display: flex;
+    align-items: center;
+    gap: 0.4rem;
+    margin-bottom: 0.15rem;
+}
+
+.heap-id {
+    color: var(--hc, #fab387);
+    font-weight: 800;
+    font-size: 0.72rem;
+}
+
+.heap-type {
+    color: #585b70;
+    font-size: 0.56rem;
+    text-transform: uppercase;
+    letter-spacing: 0.06em;
+}
+
+.heap-gc {
+    margin-left: auto;
+    color: #f38ba8;
+    font-size: 0.6rem;
+    font-weight: 700;
+}
+
+.heap-body {
+    color: #a6adc8;
+    font-size: 0.7rem;
+    word-break: break-word;
+}
+
+/* new block drops in with a bounce */
+.heap-drop {
+    animation: heap-in 0.5s cubic-bezier(0.2, 0.9, 0.3, 1.4);
+}
+
+@keyframes heap-in {
+    0% {
+        transform: scale(0.4) translateY(16px);
+        opacity: 0;
+    }
+
+    60% {
+        transform: scale(1.05);
+    }
+
+    100% {
+        transform: none;
+        opacity: 1;
+    }
+}
+
+/* manual free (C/C++) — shake, then gray out */
+.heap-freed {
+    animation: freed-shake 0.55s ease;
+}
+
+@keyframes freed-shake {
+
+    0%,
+    100% {
+        transform: none;
+    }
+
+    20% {
+        transform: translateX(-4px);
+    }
+
+    40% {
+        transform: translateX(4px);
+    }
+
+    60% {
+        transform: translateX(-3px);
+    }
+
+    80% {
+        transform: translateX(2px);
+    }
+}
+
+/* garbage collected (JS/Python) — sweep animation, then faded */
+.heap-block.collected {
+    opacity: 0.32;
+    filter: grayscale(1);
+    border-style: dashed;
+    border-color: #585b70;
+}
+
+.heap-block.just-collected {
+    animation: gc-sweep 0.8s ease;
+}
+
+@keyframes gc-sweep {
+    0% {
+        transform: none;
+    }
+
+    35% {
+        transform: translateY(-10px) rotate(-1.5deg);
+    }
+
+    70% {
+        transform: translateY(3px) rotate(0.5deg);
+    }
+
+    100% {
+        transform: none;
+    }
+}
+
+/* ---------- OUTPUT — fixed at panel bottom ---------- */
+.viz-output {
+    flex-shrink: 0;
+    border-top: 1px solid #313244;
+    background: #11111b;
+    padding: 0.5rem 0.8rem 0.6rem;
+    max-height: 120px;
+    overflow-y: auto;
+}
+
+.viz-section-title {
+    font-size: 0.6rem;
+    color: #a6adc8;
+    letter-spacing: 0.12em;
+    font-weight: 800;
+    margin-bottom: 0.3rem;
+}
+
+.viz-log {
+    font-family: Consolas, monospace;
+    font-size: 0.72rem;
+    color: #cdd6f4;
+}
+
+.viz-log.err {
+    color: #f38ba8;
+}
+
+.log-flash {
+    animation: log-new 0.8s ease;
+}
+
+@keyframes log-new {
+    0% {
+        background: #a6e3a133;
+    }
+
+    100% {
+        background: transparent;
+    }
+}
+
+@keyframes viz-pulse {
+
+    0%,
+    100% {
+        opacity: 0.4;
+    }
+
+    50% {
+        opacity: 1;
+    }
+}

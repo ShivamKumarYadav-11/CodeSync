@@ -1,0 +1,550 @@
+.editor-page {
+    height: 100vh;
+    display: flex;
+    flex-direction: column;
+}
+
+.topbar {
+    height: 52px;
+    flex-shrink: 0;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 0 1rem;
+    background: #181825;
+    border-bottom: 1px solid #313244;
+}
+
+.brand {
+    font-weight: 700;
+    color: #89b4fa;
+}
+
+.room-info {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    color: #a6adc8;
+    font-size: 0.9rem;
+}
+
+.room-info strong {
+    color: #f9e2af;
+    letter-spacing: 0.15em;
+}
+
+.copy-btn {
+    background: none;
+    border: none;
+    cursor: pointer;
+    font-size: 1rem;
+}
+
+.btn-leave {
+    background: #f38ba8;
+    border: none;
+    color: #11111b;
+    padding: 0.4rem 0.9rem;
+    border-radius: 6px;
+    cursor: pointer;
+    font-weight: 600;
+}
+
+.main {
+    flex: 1;
+    display: flex;
+    overflow: hidden;
+    min-height: 0;
+}
+
+/* members panel */
+.members-panel {
+    width: 230px;
+    flex-shrink: 0;
+    background: #181825;
+    border-right: 1px solid #313244;
+    padding: 1rem 0.8rem;
+    overflow-y: auto;
+}
+
+.members-panel h3 {
+    font-size: 0.8rem;
+    color: #a6adc8;
+    margin-bottom: 0.9rem;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+}
+
+.members-panel ul {
+    list-style: none;
+}
+
+.members-panel li {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    padding: 0.45rem 0.5rem;
+    border-radius: 6px;
+    margin-bottom: 0.25rem;
+    font-size: 0.9rem;
+}
+
+.members-panel li:hover {
+    background: #11111b;
+}
+
+.dot {
+    width: 10px;
+    height: 10px;
+    border-radius: 50%;
+    flex-shrink: 0;
+}
+
+.name {
+    flex: 1;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+}
+
+.user-id {
+    font-size: 0.68rem;
+    color: #585b70;
+}
+
+.you-tag {
+    font-size: 0.62rem;
+    background: #a6e3a1;
+    color: #11111b;
+    padding: 0.1rem 0.4rem;
+    border-radius: 4px;
+    font-weight: 700;
+}
+
+/* editor column: toolbar → editor → terminal */
+.editor-area {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    min-width: 0;
+}
+
+/* NEW: toolbar */
+.toolbar {
+    height: 42px;
+    flex-shrink: 0;
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+    padding: 0 0.8rem;
+    background: #181825;
+    border-bottom: 1px solid #313244;
+}
+
+.run-btn {
+    background: #a6e3a1;
+    color: #11111b;
+    border: none;
+    padding: 0.35rem 1rem;
+    border-radius: 6px;
+    font-weight: 700;
+    cursor: pointer;
+    font-size: 0.85rem;
+}
+
+.run-btn:disabled {
+    background: #585b70;
+    cursor: not-allowed;
+}
+
+.shortcut-hint {
+    font-size: 0.68rem;
+    color: #585b70;
+}
+
+.spacer {
+    flex: 1;
+}
+
+.lang-label {
+    font-size: 0.75rem;
+    color: #a6adc8;
+}
+
+.lang-select {
+    background: #11111b;
+    color: #cdd6f4;
+    border: 1px solid #45475a;
+    padding: 0.3rem 0.5rem;
+    border-radius: 6px;
+    font-size: 0.8rem;
+    outline: none;
+    cursor: pointer;
+}
+
+.editor-holder {
+    flex: 1;
+    position: relative;
+    min-height: 0;
+}
+
+/* typing name pill */
+.typing-indicator {
+    position: absolute;
+    top: 10px;
+    right: 16px;
+    z-index: 10;
+    background: #181825;
+    border: 1px solid #45475a;
+    border-left: 4px solid #89b4fa;
+    padding: 0.4rem 0.8rem;
+    border-radius: 6px;
+    font-size: 0.85rem;
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    box-shadow: 0 4px 14px rgba(0, 0, 0, 0.4);
+}
+
+.typing-indicator .dot {
+    animation: pulse 1s infinite;
+}
+
+@keyframes pulse {
+
+    0%,
+    100% {
+        opacity: 0.3;
+    }
+
+    50% {
+        opacity: 1;
+    }
+}
+
+/* NEW: terminal */
+.terminal {
+    height: 230px;
+    flex-shrink: 0;
+    display: flex;
+    flex-direction: column;
+    background: #11111b;
+    border-top: 1px solid #313244;
+    font-family: 'Cascadia Code', Consolas, 'Courier New', monospace;
+}
+
+.terminal.collapsed {
+    height: auto;
+}
+
+.terminal-header {
+    display: flex;
+    align-items: center;
+    gap: 0.6rem;
+    padding: 0.35rem 0.8rem;
+    background: #181825;
+    border-bottom: 1px solid #313244;
+}
+
+.terminal-title {
+    font-size: 0.7rem;
+    letter-spacing: 0.12em;
+    color: #a6adc8;
+    font-weight: 700;
+}
+
+.terminal-running {
+    color: #f9e2af;
+    font-size: 0.7rem;
+    animation: pulse 1s infinite;
+}
+
+.terminal-actions {
+    margin-left: auto;
+    display: flex;
+    gap: 0.4rem;
+}
+
+.term-btn {
+    background: none;
+    border: 1px solid #45475a;
+    color: #a6adc8;
+    font-size: 0.7rem;
+    padding: 0.15rem 0.5rem;
+    border-radius: 4px;
+    cursor: pointer;
+}
+
+.term-btn:hover {
+    background: #11111b;
+}
+
+.terminal-body {
+    flex: 1;
+    overflow-y: auto;
+    padding: 0.5rem 0.8rem;
+    font-size: 0.82rem;
+    line-height: 1.45;
+}
+
+.term-line {
+    white-space: pre-wrap;
+    word-break: break-word;
+}
+
+.term-line.cmd {
+    color: #a6e3a1;
+}
+
+.term-line.out {
+    color: #cdd6f4;
+}
+
+.term-line.err {
+    color: #f38ba8;
+}
+
+.term-line.ok {
+    color: #a6e3a1;
+}
+
+.term-line.info {
+    color: #585b70;
+}
+
+.term-line.cursor {
+    animation: pulse 1s infinite;
+}
+
+/* toast */
+.toast {
+    position: fixed;
+    bottom: 20px;
+    left: 50%;
+    transform: translateX(-50%);
+    background: #a6e3a1;
+    color: #11111b;
+    padding: 0.6rem 1.2rem;
+    border-radius: 8px;
+    font-weight: 600;
+    opacity: 0;
+    pointer-events: none;
+    transition: opacity 0.3s;
+    z-index: 100;
+}
+
+.toast.show {
+    opacity: 1;
+}
+
+/* ==================== SAVE / FILES MODALS ==================== */
+.modal-overlay {
+    position: fixed;
+    inset: 0;
+    background: rgba(0, 0, 0, 0.55);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    z-index: 200;
+}
+
+.modal {
+    background: #181825;
+    border: 1px solid #45475a;
+    border-radius: 12px;
+    padding: 1.4rem;
+    width: 380px;
+    box-shadow: 0 20px 60px rgba(0, 0, 0, 0.6);
+}
+
+.modal h3 {
+    color: #cdd6f4;
+    margin-bottom: 0.9rem;
+    font-size: 1rem;
+}
+
+.modal input {
+    width: 100%;
+    padding: 0.6rem 0.8rem;
+    border-radius: 8px;
+    border: 1px solid #45475a;
+    background: #11111b;
+    color: #cdd6f4;
+    outline: none;
+    font-size: 0.95rem;
+}
+
+.modal input:focus {
+    border-color: #89b4fa;
+}
+
+.modal-hint {
+    font-size: 0.72rem;
+    color: #585b70;
+    margin-top: 0.5rem;
+}
+
+.modal-hint code {
+    color: #f9e2af;
+}
+
+.modal-actions {
+    display: flex;
+    gap: 0.6rem;
+    margin-top: 1.1rem;
+    justify-content: flex-end;
+}
+
+.modal-btn {
+    padding: 0.45rem 1.1rem;
+    border-radius: 6px;
+    border: none;
+    cursor: pointer;
+    font-weight: 600;
+    font-size: 0.85rem;
+}
+
+.modal-btn.cancel {
+    background: none;
+    border: 1px solid #45475a;
+    color: #a6adc8;
+}
+
+.modal-btn.primary {
+    background: #89b4fa;
+    color: #11111b;
+}
+
+.modal-btn.primary:disabled {
+    opacity: 0.5;
+    cursor: not-allowed;
+}
+
+.modal-head {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.modal-x {
+    background: none;
+    border: none;
+    color: #a6adc8;
+    cursor: pointer;
+    font-size: 1rem;
+}
+
+.files-modal {
+    width: 480px;
+    max-height: 65vh;
+    display: flex;
+    flex-direction: column;
+}
+
+.file-list {
+    list-style: none;
+    overflow-y: auto;
+    margin-top: 0.4rem;
+}
+
+.file-list li {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    padding: 0.5rem 0.6rem;
+    border-radius: 6px;
+}
+
+.file-list li:hover {
+    background: #11111b;
+}
+
+.file-info {
+    flex: 1;
+    cursor: pointer;
+    min-width: 0;
+}
+
+.file-name {
+    display: block;
+    font-size: 0.85rem;
+    color: #cdd6f4;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+}
+
+.file-meta {
+    font-size: 0.68rem;
+    color: #585b70;
+}
+
+.file-del {
+    background: none;
+    border: none;
+    cursor: pointer;
+    font-size: 0.9rem;
+    opacity: 0.4;
+}
+
+.file-del:hover {
+    opacity: 1;
+}
+
+/* toolbar small buttons (Save / Files) */
+.tool-btn {
+    background: none;
+    border: 1px solid #45475a;
+    color: #a6adc8;
+    padding: 0.32rem 0.8rem;
+    border-radius: 6px;
+    cursor: pointer;
+    font-size: 0.8rem;
+    font-weight: 600;
+}
+
+.tool-btn:hover {
+    background: #11111b;
+    color: #cdd6f4;
+}
+
+/* ==================== MEMORY VISUALIZER ==================== */
+/* Monaco class — highlights the line the visualizer is on */
+.viz-active-line {
+    background: rgba(137, 180, 250, 0.16) !important;
+}
+
+/* ==================== EDITOR PLACEHOLDER ==================== */
+.editor-wrap {
+    position: relative;
+    height: 100%;
+}
+
+/* sits over the editor, just after the line-number gutter */
+.editor-placeholder {
+    position: absolute;
+    top: 5px;
+    /* first line */
+    left: 66px;
+    /* skip the line-number gutter */
+    color: #585b70;
+    font-size: 18px;
+    font-style: italic;
+    pointer-events: none;
+    /* NEVER blocks clicking/typing in the editor */
+    z-index: 5;
+    user-select: none;
+    animation: placeholder-pulse 2.5s infinite;
+}
+
+@keyframes placeholder-pulse {
+
+    0%,
+    100% {
+        opacity: 1;
+    }
+
+    50% {
+        opacity: 0.55;
+    }
+}
