@@ -1,6 +1,6 @@
-node_modules
-dist
-dist-ssr
-*.local
-
-package-lock.json
+node_modules/
+client/node_modules/
+client/dist/
+sandbox/
+saved-code/
+.env*

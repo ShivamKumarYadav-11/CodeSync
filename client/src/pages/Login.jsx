@@ -24,10 +24,22 @@ export default function Login() {
         if (!socket.connected) socket.connect();
     }, []);
 
+    // const generate = () => {
+    //     setRoomId(generateRoomId());
+    //     setCopied(false);
+    // };
+   
+    //Here new add a security (do not enter your user name utill not create room id)
     const generate = () => {
+        if (!username.trim()) {
+            setError('Please enter your username first');
+            return;
+        }
+        setError('');
         setRoomId(generateRoomId());
         setCopied(false);
     };
+
 
     const copyRoomId = () => {
         if (!roomId) return;
@@ -98,12 +110,12 @@ export default function Login() {
                     </div>
 
                     <form onSubmit={handleLogin}>
-                        <label htmlFor="username">Username / Email</label>
+                        <label htmlFor="username">Username / Name</label>
                         <input
                             id="username"
                             value={username}
                             onChange={(e) => setUsername(e.target.value)}
-                            placeholder="Enter your username"
+                            placeholder="Enter your username / Name"
                             maxLength={20}
                             autoComplete="off"
                         />

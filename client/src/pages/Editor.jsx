@@ -280,6 +280,8 @@ export default function EditorPage() {
             {showFilesPanel && (
                 <FilesPanel
                     roomId={user.roomId}
+                    username={user.username}
+                    isTeacher={user.userId === 'Teacher'}
                     onClose={() => setShowFilesPanel(false)}
                     onLoad={handleLoadFile}
                     showToast={showToast}

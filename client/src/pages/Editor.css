@@ -479,16 +479,32 @@
     color: #585b70;
 }
 
+/* delete button — always clearly visible */
 .file-del {
-    background: none;
-    border: none;
-    cursor: pointer;
+    background: #f38ba822;
+    /* soft red tint */
+    border: 1px solid #f38ba8;
+    /* full red border */
+    color: #f38ba8;
+    border-radius: 6px;
+    padding: 0.28rem 0.6rem;
     font-size: 0.9rem;
-    opacity: 0.4;
+    cursor: pointer;
+    flex-shrink: 0;
+    transition: background 0.15s, transform 0.15s;
 }
 
 .file-del:hover {
-    opacity: 1;
+    background: #f38ba8;
+    /* solid red on hover */
+    color: #11111b;
+    /* dark icon on red */
+    transform: scale(1.08);
+    /* slight grow */
+}
+
+.file-del:active {
+    transform: scale(0.95);
 }
 
 /* toolbar small buttons (Save / Files) */
@@ -547,4 +563,143 @@
     50% {
         opacity: 0.55;
     }
+}
+
+/* ==================== FILE DELETE CONFIRMATION ==================== */
+.file-confirm {
+    display: flex;
+    align-items: center;
+    gap: 0.35rem;
+    flex-shrink: 0;
+}
+
+.file-confirm-text {
+    font-size: 0.7rem;
+    color: #f38ba8;
+    font-weight: 600;
+}
+
+.file-yes {
+    background: #f38ba8;
+    color: #11111b;
+    border: none;
+    border-radius: 5px;
+    padding: 0.18rem 0.55rem;
+    font-size: 0.7rem;
+    font-weight: 700;
+    cursor: pointer;
+}
+
+.file-yes:hover {
+    background: #eb7a95;
+}
+
+.file-no {
+    background: none;
+    border: 1px solid #45475a;
+    color: #a6adc8;
+    border-radius: 5px;
+    padding: 0.18rem 0.55rem;
+    font-size: 0.7rem;
+    cursor: pointer;
+}
+
+.file-no:hover {
+    border-color: #a6adc8;
+}
+
+.files-footer {
+    border-top: 1px solid #313244;
+    margin-top: 0.7rem;
+    padding-top: 0.7rem;
+    display: flex;
+    justify-content: flex-end;
+}
+
+.clear-all-btn {
+    background: none;
+    border: 1px solid #f38ba866;
+    color: #f38ba8;
+    padding: 0.35rem 0.8rem;
+    border-radius: 6px;
+    font-size: 0.78rem;
+    cursor: pointer;
+    font-weight: 600;
+}
+
+.clear-all-btn:hover {
+    background: #f38ba822;
+}
+
+/* ==================== FILES: room/all toggle ==================== */
+.files-tabs {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: .5rem;
+    margin-bottom: .8rem;
+}
+
+.files-tab {
+    padding: .5rem .6rem;
+    border-radius: 8px;
+    cursor: pointer;
+    background: #171717;
+    border: 1px solid #3A3A36;
+    color: #A8A29E;
+    font-size: .8rem;
+    font-weight: 600;
+    transition: all .15s;
+}
+
+.files-tab:hover {
+    border-color: #E0A458;
+    color: #E7E5E4;
+}
+
+.files-tab.active {
+    background: #E7E5E4;
+    color: #171717;
+    border-color: #E7E5E4;
+}
+
+.room-group {
+    margin-bottom: .9rem;
+}
+
+.room-group-head {
+    display: flex;
+    align-items: center;
+    gap: .5rem;
+    font-size: .8rem;
+    font-weight: 700;
+    color: #E0A458;
+    padding: .3rem .2rem .3rem .35rem;
+}
+
+.current-room-tag {
+    font-size: .6rem;
+    font-weight: 700;
+    color: #171717;
+    background: #E0A458;
+    border-radius: 4px;
+    padding: .05rem .35rem;
+}
+
+.file-count {
+    margin-left: auto;
+    color: #7D7A73;
+    font-size: .7rem;
+    font-weight: 400;
+}
+
+/* ==================== FILES: student badge ==================== */
+.student-badge {
+    font-size: 0.6rem;
+    font-weight: 700;
+    background: #A8A29E;
+    color: #171717;
+    padding: 0.12rem 0.45rem;
+    border-radius: 4px;
+    margin-left: 0.4rem;
+    vertical-align: middle;
 }

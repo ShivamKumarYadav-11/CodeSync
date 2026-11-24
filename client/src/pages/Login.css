@@ -1,9 +1,9 @@
 /* ============================================================
-   CodeSync login — rectangular card
-   Large screens : wide rectangle (branding + form side by side)
-   Small screens : compact single-column card (branding hidden)
-   One consistent palette everywhere:
-   page #0b0c1a | card #12142b | inputs #171a38 | purple #7c5cfc → #6244e5
+   CodeSync login — WARM GRAPHITE theme
+   Black #171717 | Graphite #222222 | Charcoal #2D2D2B
+   Dark Stone #3A3A36 | Stone #52504B | Warm Silver #7D7A73
+   Silver #A8A29E | Bone #E7E5E4 | Off-white #FAFAF9
+   Warm Gold accent #E0A458
 ============================================================ */
 .login-page {
     min-height: 100vh;
@@ -11,9 +11,9 @@
     align-items: center;
     justify-content: center;
     background:
-        radial-gradient(ellipse at top left, rgba(124, 92, 252, .13), transparent 55%),
-        radial-gradient(ellipse at bottom right, rgba(98, 68, 229, .10), transparent 55%),
-        #0b0c1a;
+        radial-gradient(ellipse at top left, rgba(224, 164, 88, .06), transparent 55%),
+        radial-gradient(ellipse at bottom right, rgba(224, 164, 88, .04), transparent 55%),
+        #171717;
     padding: 1.5rem;
 }
 
@@ -21,14 +21,12 @@
 .login-card {
     width: 100%;
     max-width: 860px;
-    /* wide rectangle on large screens */
     display: flex;
-    background: #12142b;
-    border: 1px solid #262a4d;
+    background: #222222;
+    border: 1px solid #3A3A36;
     border-radius: 18px;
     overflow: hidden;
-    /* panels follow the card corners */
-    box-shadow: 0 24px 70px rgba(0, 0, 0, .55);
+    box-shadow: 0 24px 70px rgba(0, 0, 0, .6);
 }
 
 /* ============ LEFT PANEL — branding ============ */
@@ -39,11 +37,11 @@
     padding: 2.6rem 2.2rem;
     display: flex;
     flex-direction: column;
-    background: linear-gradient(165deg, #1a1d42 0%, #221f63 60%, #2a1f6e 100%);
-    border-right: 1px solid #2a2d52;
+    background: linear-gradient(165deg, #2D2D2B 0%, #222222 55%, #171717 100%);
+    border-right: 1px solid #3A3A36;
 }
 
-/* soft purple glow decorations */
+/* soft warm glow decorations */
 .card-left::before,
 .card-left::after {
     content: '';
@@ -55,7 +53,7 @@
 .card-left::before {
     width: 260px;
     height: 260px;
-    background: radial-gradient(circle, rgba(124, 92, 252, .25), transparent 70%);
+    background: radial-gradient(circle, rgba(224, 164, 88, .12), transparent 70%);
     bottom: -90px;
     right: -80px;
 }
@@ -63,7 +61,7 @@
 .card-left::after {
     width: 190px;
     height: 190px;
-    background: radial-gradient(circle, rgba(98, 68, 229, .16), transparent 70%);
+    background: radial-gradient(circle, rgba(232, 229, 228, .05), transparent 70%);
     top: -70px;
     left: -60px;
 }
@@ -73,12 +71,12 @@
     z-index: 1;
     font-size: 1.3rem;
     font-weight: 800;
-    color: #fff;
+    color: #FAFAF9;
     margin-bottom: 2.6rem;
 }
 
 .brand-mark {
-    color: #8b5cf6;
+    color: #E0A458;
     margin-right: .35rem;
 }
 
@@ -87,12 +85,12 @@
     z-index: 1;
     font-size: 2.1rem;
     line-height: 1.25;
-    color: #fff;
+    color: #E7E5E4;
     font-weight: 800;
 }
 
 .brand-title-accent {
-    color: #8b5cf6;
+    color: #E0A458;
 }
 
 .brand-points {
@@ -109,7 +107,7 @@
     display: flex;
     align-items: center;
     gap: .7rem;
-    color: #b9bce0;
+    color: #A8A29E;
     font-size: .9rem;
 }
 
@@ -117,14 +115,14 @@
     width: 21px;
     height: 21px;
     border-radius: 50%;
-    background: #7c5cfc;
-    color: #fff;
+    background: #E0A458;
+    color: #171717;
     display: flex;
     align-items: center;
     justify-content: center;
     font-size: .68rem;
     font-weight: 800;
-    box-shadow: 0 0 12px rgba(124, 92, 252, .5);
+    box-shadow: 0 0 12px rgba(224, 164, 88, .35);
     flex-shrink: 0;
 }
 
@@ -133,7 +131,7 @@
     z-index: 1;
     margin-top: auto;
     padding-top: 1.5rem;
-    color: #6b6e93;
+    color: #7D7A73;
     font-size: .75rem;
 }
 
@@ -146,12 +144,12 @@
 
 .card-right h2 {
     font-size: 1.55rem;
-    color: #fff;
+    color: #FAFAF9;
     font-weight: 800;
 }
 
 .login-sub {
-    color: #8a8db0;
+    color: #7D7A73;
     margin: .3rem 0 1.35rem;
     font-size: .9rem;
 }
@@ -167,9 +165,9 @@
 .type-btn {
     padding: .65rem .5rem;
     border-radius: 10px;
-    border: 1px solid #2a2d52;
-    background: #171a38;
-    color: #9a9dc4;
+    border: 1px solid #3A3A36;
+    background: #2D2D2B;
+    color: #A8A29E;
     cursor: pointer;
     font-weight: 600;
     font-size: .87rem;
@@ -177,22 +175,22 @@
 }
 
 .type-btn:hover {
-    border-color: #7c5cfc;
-    color: #d6d7ea;
+    border-color: #E0A458;
+    color: #E7E5E4;
 }
 
 .type-btn.active {
-    background: linear-gradient(135deg, #7c5cfc, #6244e5);
-    border-color: #7c5cfc;
-    color: #fff;
-    box-shadow: 0 4px 18px rgba(124, 92, 252, .35);
+    background: #E7E5E4;
+    border-color: #E7E5E4;
+    color: #171717;
+    box-shadow: 0 4px 18px rgba(231, 229, 228, .18);
 }
 
 /* inputs */
 .card-right label {
     display: block;
     font-size: .77rem;
-    color: #9a9dc4;
+    color: #A8A29E;
     margin: 1rem 0 .38rem;
     font-weight: 600;
 }
@@ -201,17 +199,17 @@
     width: 100%;
     padding: .72rem .9rem;
     border-radius: 10px;
-    background: #171a38;
-    border: 1px solid #2a2d52;
-    color: #e8e9f5;
+    background: #171717;
+    border: 1px solid #3A3A36;
+    color: #FAFAF9;
     outline: none;
     font-size: .95rem;
     transition: border-color .2s, box-shadow .2s;
 }
 
 .card-right input:focus {
-    border-color: #7c5cfc;
-    box-shadow: 0 0 0 3px rgba(124, 92, 252, .15);
+    border-color: #E0A458;
+    box-shadow: 0 0 0 3px rgba(224, 164, 88, .15);
 }
 
 /* room id + copy */
@@ -225,14 +223,14 @@
     min-width: 0;
     letter-spacing: 3px;
     font-weight: 700;
-    color: #a78bfa;
+    color: #E0A458;
 }
 
 .icon-btn {
     width: 46px;
     border-radius: 10px;
-    border: 1px solid #2a2d52;
-    background: #171a38;
+    border: 1px solid #3A3A36;
+    background: #2D2D2B;
     cursor: pointer;
     font-size: 1rem;
     flex-shrink: 0;
@@ -240,8 +238,8 @@
 }
 
 .icon-btn:hover:not(:disabled) {
-    border-color: #7c5cfc;
-    background: #1d2145;
+    border-color: #E0A458;
+    background: #333330;
 }
 
 .icon-btn:disabled {
@@ -257,30 +255,37 @@
     border-radius: 10px;
     cursor: pointer;
     background: none;
-    border: 1px dashed #7c5cfc;
-    color: #b6a4ff;
+    border: 1px dashed #7D7A73;
+    color: #A8A29E;
     font-weight: 700;
     font-size: .87rem;
-    transition: background .2s, color .2s;
+    transition: background .2s, color .2s, border-color .2s;
 }
 
-.generate-btn:hover {
-    background: rgba(124, 92, 252, .12);
-    color: #d6ccff;
+.generate-btn:hover:not(:disabled) {
+    background: rgba(224, 164, 88, .1);
+    color: #E0A458;
+    border-color: #E0A458;
+}
+
+.generate-btn:disabled {
+    border-color: #3A3A36;
+    color: #52504B;
+    cursor: not-allowed;
 }
 
 .roomid-hint {
     font-size: .72rem;
-    color: #6b6e93;
+    color: #7D7A73;
     margin-top: .65rem;
     line-height: 1.6;
 }
 
 .roomid-hint b {
-    color: #a78bfa;
+    color: #E0A458;
 }
 
-/* login button */
+/* login button — bone with dark text */
 .login-btn {
     width: 100%;
     margin-top: 1.3rem;
@@ -288,17 +293,18 @@
     border: none;
     border-radius: 10px;
     cursor: pointer;
-    background: linear-gradient(135deg, #7c5cfc, #6244e5);
-    color: #fff;
+    background: #E7E5E4;
+    color: #171717;
     font-size: 1rem;
     font-weight: 700;
-    box-shadow: 0 6px 22px rgba(124, 92, 252, .4);
-    transition: transform .15s, box-shadow .15s;
+    box-shadow: 0 6px 22px rgba(231, 229, 228, .15);
+    transition: transform .15s, box-shadow .15s, background .15s;
 }
 
 .login-btn:hover {
     transform: translateY(-2px);
-    box-shadow: 0 9px 28px rgba(124, 92, 252, .55);
+    background: #E0A458;
+    box-shadow: 0 9px 28px rgba(231, 229, 228, .25);
 }
 
 .login-btn:active {
@@ -306,7 +312,7 @@
 }
 
 .login-error {
-    color: #f38ba8;
+    color: #E78C7C;
     text-align: center;
     margin-top: .9rem;
     font-size: .84rem;
@@ -314,25 +320,21 @@
 
 /* ============================================================
    RESPONSIVE — small screens: compact single-column card
-   (branding panel hides, rectangle becomes narrow)
 ============================================================ */
 @media (max-width: 880px) {
     .card-left {
         display: none;
     }
 
-    /* hide branding on small screens */
     .login-card {
         max-width: 400px;
     }
 
-    /* back to the compact rectangle  */
     .card-right {
         padding: 1.9rem 1.7rem 1.6rem;
     }
 }
 
-/* very small phones */
 @media (max-width: 400px) {
     .login-page {
         padding: .8rem;
